@@ -5,6 +5,12 @@ import { SearchResults } from "../SearchResults/SearchResults";
 import { Playlist } from "../Playlist/Playlist";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResults: [track, name, artist, album],
+    };
+  }
   render() {
     return (
       <div>
