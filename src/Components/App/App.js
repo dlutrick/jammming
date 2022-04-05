@@ -21,7 +21,27 @@ class App extends React.Component {
       ],
     };
   }
-  addTrack(track) {}
+
+  addTrack(track) {
+    if (
+      this.state.playlistTracks.find((current) => {
+        current.id === track.id;
+      })
+    ) {
+      return;
+    }
+    this.setState(() => {
+      playlistTracks: [
+        {
+          name: track.name,
+          artist: track.artist,
+          album: track.album,
+          id: track.id,
+        },
+      ];
+    });
+  }
+
   render() {
     return (
       <div>
