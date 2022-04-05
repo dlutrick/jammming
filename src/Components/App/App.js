@@ -20,26 +20,17 @@ class App extends React.Component {
         { name: "Bop", artist: "artist3", album: "album3", id: 3 },
       ],
     };
+    this.addTrack = this.addTrack.bind(this);
   }
 
   addTrack(track) {
-    if (
-      this.state.playlistTracks.find((current) => {
-        current.id === track.id;
-      })
-    ) {
+    let tracks = this.state.playlistTracks;
+    if (tracks.find((current) => current.id === track.id)) {
       return;
     }
-    this.setState(() => {
-      playlistTracks: [
-        {
-          name: track.name,
-          artist: track.artist,
-          album: track.album,
-          id: track.id,
-        },
-      ];
-    });
+
+    tracks.push(track);
+    this.setState({ playlistTracks: tracks });
   }
 
   render() {
@@ -51,7 +42,10 @@ class App extends React.Component {
         <div className="App">
           <SearchBar />
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} />
+            <SearchResults
+              searchResults={this.state.searchResults}
+              onAdd={this.addTrack}
+            />
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
